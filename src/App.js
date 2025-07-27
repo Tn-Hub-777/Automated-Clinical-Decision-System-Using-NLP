@@ -13,7 +13,7 @@ function App() {
   };
 
   const handleQuerySubmit = () => {
-    setResponse(`Processing query: "${query}" with uploaded files...`);
+    setResponse(`Analyzing: "${query}" with uploaded files...`);
   };
 
   return (
