@@ -44,14 +44,14 @@ function App() {
       {/* Header with Stethoscope SVG */}
       <div className="text-center mb-4">
         <img
-          src="/images/statoscope.png"
+          src="/images/clintnobg.png"
           alt="Stethoscope"
-          width="60"
-          height="60"
-          className="mb-3"
+          width="501"
+          height="501"
+          className="mb-3 logo-img"
           style={{ objectFit: 'contain' }}
         />
-        <h1 className="text-success mt-2">Automated Clinical Decision System</h1>
+        <h1 className="text-success mt-2">Clinical Language Intelligence Using NLP & Transformers</h1>
         <p className="text-muted">
           Upload clinical data and ask questions to receive AI-powered suggestions.
         </p>
@@ -89,8 +89,8 @@ function App() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="e.g., What diagnosis fits this report?"
           ></textarea>
-          <button 
-            onClick={handleQuerySubmit} 
+          <button
+            onClick={handleQuerySubmit}
             className="btn btn-success w-100"
             disabled={isLoading}
           >
@@ -105,24 +105,24 @@ function App() {
           <h5 className="text-success mb-3">Medical Suggestions</h5>
           <div className="border rounded p-3 bg-white">
             {response ? (
-                <div style={{ fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto' }}>
-                    <ReactMarkdown>
-                        {response}
-                    </ReactMarkdown>
-                </div>
+              <div style={{ fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto' }}>
+                <ReactMarkdown>
+                  {response}
+                </ReactMarkdown>
+              </div>
             ) : (
-                <p className="text-muted">
-                    Your medical suggestions will appear here after you submit a query.
-                    Please note: This is an AI assistant and not a replacement for professional medical advice.
-                </p>
+              <p className="text-muted">
+                Your medical suggestions will appear here after you submit a query.
+                Please note: This is an AI assistant and not a replacement for professional medical advice.
+              </p>
             )}
           </div>
           {response && (
-              <div className="mt-3">
-                  <small className="text-muted">
-                      ⚕️ These are general suggestions. Always consult a healthcare provider for medical advice.
-                  </small>
-              </div>
+            <div className="mt-3">
+              <small className="text-muted">
+                ⚕️ These are general suggestions. Always consult a healthcare provider for medical advice.
+              </small>
+            </div>
           )}
         </div>
       </div>

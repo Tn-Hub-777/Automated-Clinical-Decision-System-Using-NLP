@@ -8,7 +8,7 @@ body {
 
 /* Markdown content styling */
 h3 {
-    color: #198754;
+    color: #127dc5;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     font-weight: 600;
@@ -22,4 +22,51 @@ ul {
 li {
     margin-bottom: 0.5rem;
     line-height: 1.5;
+}
+
+.text-success {
+    color: #127dc5 !important;
+}
+
+.btn-success {
+    background-color: #127dc5 !important;
+    border-color: #127dc5 !important;
+}
+
+.btn-success:hover {
+    background-color: #127dc5 !important;
+    border-color: #127dc5 !important;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-img {
+  animation: fadeInDown 1.5s ease-out;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  animation: pulse 1.5s infinite;
+  cursor: pointer;
 }
