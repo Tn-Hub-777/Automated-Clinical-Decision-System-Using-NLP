@@ -15,30 +15,34 @@ function App() {
   };
 
   const handleQuerySubmit = async () => {
-    if (!query.trim()) {
-      setResponse('Please enter a medical query.');
-      return;
-    }
+  if (!query.trim()) {
+    setResponse('Please enter a medical query.');
+    return;
+  }
 
-    setIsLoading(true);
-    try {
-      const response = await fetch('http://localhost:5000/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query: query }),
-      });
+  setIsLoading(true);
+  try {
+    const formData = new FormData();
+    formData.append('query', query);
+    
+    // Append files if they exist, otherwise append 'no_image_data'
+    formData.append('pdf', pdf || 'no_image_data');
+    formData.append('xray', xray || 'no_image_data');
+    formData.append('eyeImage', eyeImage || 'no_image_data');
 
-      const data = await response.json();
-      setResponse(data.response);
-    } catch (error) {
-      setResponse('Error: Could not get medical suggestions. Please try again.');
-      console.error('Error:', error);
-    }
-    setIsLoading(false);
-  };
+    const response = await fetch('http://localhost:5000/predict', {
+      method: 'POST',
+      body: formData,
+    });
 
+    const data = await response.json();
+    setResponse(data.response);
+  } catch (error) {
+    setResponse('Error: Could not get medical suggestions. Please try again.');
+    console.error('Error:', error);
+  }
+  setIsLoading(false);
+};
   return (
     <div className="container py-5 bg-light">
       {/* Header with Stethoscope SVG */}
