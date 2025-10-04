@@ -7,34 +7,26 @@ import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
 from huggingface_hub import InferenceClient
-import sys 
+import sys
 
-# Determine the absolute path of the directory containing this server.py file
-# When running on Render, this will likely be /opt/render/project/src/
-current_file_dir = os.path.abspath(os.path.dirname(__file__))
+# --- CORRECT PATH LOGIC ---
+# If server.py is at the root, the project root IS the script's directory.
+project_root_on_render = os.path.abspath(os.path.dirname(__file__))
 
-# Go up one level from 'src' to get to the project's root directory on Render
-# This should be /opt/render/project/
-project_root_on_render = os.path.dirname(current_file_dir)
-
-# Define the path to your 'public' folder, relative to the project root on Render
-# This should be /opt/render/project/public/
+# Define the path to your 'public' folder, relative to the project root.
 public_folder = os.path.join(project_root_on_render, 'public')
 
-print(f"DEBUG: Current file directory (where server.py is): {current_file_dir}", file=sys.stderr)
+# --- Your DEBUG print statements can remain here ---
 print(f"DEBUG: Calculated project root on Render: {project_root_on_render}", file=sys.stderr)
 print(f"DEBUG: Public folder path: {public_folder}", file=sys.stderr)
-print(f"DEBUG: Does public folder exist: {os.path.exists(public_folder)}", file=sys.stderr)
-print(f"DEBUG: Contents of public folder: {os.listdir(public_folder) if os.path.exists(public_folder) else 'Does not exist'}", file=sys.stderr)
+# ... etc.
 
-# Initialize Flask app
-# - template_folder: tells Flask where to find HTML templates (e.g., index.html)
-# - static_folder: tells Flask where to find static assets (e.g., CSS, JS, images)
-app = Flask(__name__, 
-            template_folder=public_folder, 
-            static_folder=public_folder) # Point static files to public_folder
+# --- Initialize Flask app ---
+app = Flask(__name__,
+            template_folder=public_folder,
+            static_folder=public_folder)
 
-CORS(app) 
+CORS(app)
 
 # --- HUGGING FACE CLIENT INITIALIZATION ---
 try:
