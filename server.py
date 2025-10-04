@@ -8,7 +8,7 @@ from torchvision import models, transforms
 from PIL import Image
 from huggingface_hub import InferenceClient
 
-app = Flask(__name__, template_folder="templates")  # Flask auto-looks here
+app = Flask(__name__, template_folder='.')  # Flask auto-looks here
 CORS(app)
 
 @app.route("/")
