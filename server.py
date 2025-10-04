@@ -8,6 +8,10 @@ from torchvision import models, transforms
 from PIL import Image
 from huggingface_hub import InferenceClient
 
+@app.route("/")
+def serve_frontend():
+    return send_from_directory("frontend/build", "index.html")
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
