@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-from flask import send_from_directory
 import os
 import json
 import torch
@@ -9,18 +8,19 @@ from torchvision import models, transforms
 from PIL import Image
 from huggingface_hub import InferenceClient
 
+app = Flask(__name__, template_folder="templates")  # Flask auto-looks here
+CORS(app)
+
 @app.route("/")
 def serve_frontend():
-    return send_from_directory("frontend/build", "index.html")
-
-app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+    return render_template("index.html")
 
 # Initialize the Hugging Face client
 client = InferenceClient(
     provider="featherless-ai",
     api_key=os.environ["HF_API_KEY"],
 )
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
